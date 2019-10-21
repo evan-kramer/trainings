@@ -39,23 +39,36 @@ kable(summary)
 
 ```
 
+### FY`r str_sub(year(now()) - 1, -2, -1)`: Weighted "Stick Rates" (averaged over FY18Q1 - FY19Q1)
 
-```{r stick_rates, include = F}
+```{r stick_rates, warning = F, echo = F, message = F}
 # Set directory and load data
 setwd("X:/disengaged_youth/Automate REC reports/Analysis/4_Version04/Monthly Report/Output/0919 September 2019/")
-summary = readxl::read_excel("16 - 24, No Credential, Not Enrolled_Monthly_REC_Report_Aug2019.xlsx", 
-      sheet = "Stick_Rates")
+stick_rate = readxl::read_excel("16 - 24, No Credential, Not Enrolled_Monthly_REC_Report_Aug2019.xlsx", 
+      sheet = "Stick_Rates") %>% 
+  # Drop variables not in the table
+  select(client_status, perc_stuck_180, perc_stuck_360) %>%
+  # Keep only the observations we want
+  filter(str_detect(client_status, "Active")) %>% 
+  # Tidy up output
+  mutate_at(
+    vars(starts_with("perc")),
+    funs(str_c(round(100 * ., 2), "%"))
+  )
+  
+# Tidy up names
+names(stick_rate) = str_to_title(str_replace_all(names(stick_rate), "_", " "))
 
-# Clean data
+# Display table
+kable(stick_rate)
 
-
-# How can we make the quarters dynamic?
+# How can we make the quarters dynamic (above)?
 
 # Adding footnotes? 
 
 ```
 
-### FY`r str_sub(year(now()) - 1, -2, -1)`: Weighted "Stick Rates" (averaged over FY18Q1 - FY19Q1)
+
 
 ### Demographics and Barriers since Opening (Oct. 20, 2014)
 
