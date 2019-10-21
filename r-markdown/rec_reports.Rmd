@@ -1,0 +1,62 @@
+```{r setup, include = F}
+# This "chunk" of code sets up the rest of the script and loads required packages
+options(java.parameters = "-Xmx16G")
+library(tidyverse)
+library(lubridate)
+library(haven)
+library(knitr)
+library(rmarkdown)
+
+# The snippet below is a yaml header that captures metadata that affect the document output
+
+```
+
+---
+title: "REC Center Report"
+author: "Office of Research, Analysis, and Reporting"
+date: `r today()`
+output: word_document
+---
+
+`r lubridate::month(now(), label = T, abbr = F)` `r year(now())`: Monthly Internal Report
+
+### Summary of Performance
+```{r summary, warning = F, echo = F, message = F}
+# Set the directory and read in the file
+setwd("X:/disengaged_youth/Automate REC reports/Analysis/4_Version04/Monthly Report/Output/0919 September 2019/")
+summary = readxl::read_excel("16 - 24, No Credential, Not Enrolled_Monthly_REC_Report_Aug2019.xlsx",
+      sheet = "Summary_of_Performance")
+
+# Reformat the variable names to make them more reader-friendly
+names(summary) = str_to_title(str_replace_all(names(summary), "_", " "))
+
+# Display the table
+kable(summary)
+
+# How would we change the values of the `Performance Metric` variable? 
+# What observations should we drop? 
+# What if we want to rename the `Last Month` variable as the actual month name (rather than just "Last Month")
+
+```
+
+
+```{r stick_rates, include = F}
+# Set directory and load data
+setwd("X:/disengaged_youth/Automate REC reports/Analysis/4_Version04/Monthly Report/Output/0919 September 2019/")
+summary = readxl::read_excel("16 - 24, No Credential, Not Enrolled_Monthly_REC_Report_Aug2019.xlsx", 
+      sheet = "Stick_Rates")
+
+# Clean data
+
+
+# How can we make the quarters dynamic?
+
+# Adding footnotes? 
+
+```
+
+### FY`r str_sub(year(now()) - 1, -2, -1)`: Weighted "Stick Rates" (averaged over FY18Q1 - FY19Q1)
+
+### Demographics and Barriers since Opening (Oct. 20, 2014)
+
+
