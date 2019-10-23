@@ -1,3 +1,10 @@
+---
+title: "REC Center Report"
+author: "Office of Research, Analysis, and Reporting"
+date: r Sys.Date()
+output: word_document
+---
+
 ```{r setup, include = F}
 # This "chunk" of code sets up the rest of the script and loads required packages
 options(java.parameters = "-Xmx16G")
@@ -7,25 +14,30 @@ library(haven)
 library(knitr)
 library(rmarkdown)
 
+# install.packages("RStata")
+# stata(<name of dofile>, path, Stata version)
+
 # The snippet below is a yaml header that captures metadata that affect the document output
 
 ```
 
----
-title: "REC Center Report"
-author: "Office of Research, Analysis, and Reporting"
-date: `r today()`
-output: word_document
----
-
 `r lubridate::month(now(), label = T, abbr = F)` `r year(now())`: Monthly Internal Report
 
 ### Summary of Performance
-```{r summary, warning = F, echo = F, message = F}
+```{r, warning = F, echo = F, message = F}
 # Set the directory and read in the file
 setwd("X:/disengaged_youth/Automate REC reports/Analysis/4_Version04/Monthly Report/Output/0919 September 2019/")
 summary = readxl::read_excel("16 - 24, No Credential, Not Enrolled_Monthly_REC_Report_Aug2019.xlsx",
-      sheet = "Summary_of_Performance")
+      sheet = "Summary_of_Performance") %>% 
+  mutate(
+    performance_metric = case_when(
+      performance_metric == "initial_intake" ~ "Short Intakes",
+      performance_metric == "full_intake" ~ "Full Intakes",
+      performance_metric == "first_placement" ~ "School Enrollments",
+      performance_metric == "first_completion" ~ "Completions (Total)",
+      T ~ str_to_title(str_replace_all(str_c("-    ", performance_metric), "_", " "))
+    )
+  )
 
 # Reformat the variable names to make them more reader-friendly
 names(summary) = str_to_title(str_replace_all(names(summary), "_", " "))
