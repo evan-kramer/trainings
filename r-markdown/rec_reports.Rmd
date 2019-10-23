@@ -63,13 +63,16 @@ names(stick_rate) = str_to_title(str_replace_all(names(stick_rate), "_", " "))
 kable(stick_rate)
 
 # How can we make the quarters dynamic (above)?
-
+# How can we make the date dynamic (below)?
 # Adding footnotes? 
 
 ```
 
-
-
 ### Demographics and Barriers since Opening (Oct. 20, 2014)
 
+### Educational Outcomes in FY19 (Since Oct. 1, 2018)
 
+The following table represents the median length of time (number of days) between full intake and enrollment:
+
+### Referrals in FY19 (Since Oct. 1, 2018)
+Overall, the ReEngagement Center has received `r ` referrals since Oct. 1, 2018.
