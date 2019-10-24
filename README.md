@@ -8,5 +8,5 @@ This repository contains training materials (heavily borrowed) for building anal
 - __Git__: Git consists of version control software that uses the command line. It logs changes in code/files. 
 	- GitHub is a code collaboration and version control website. 
 		- There is a good overview [here](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners) and [here](https://guides.github.com/activities/hello-world/).
-		- You can learn more about creating a GitHub account [here](https://help.github.com/en/github/getting-started-with-github/types-of-github-accounts#personal-user-accounts)
+		- You can learn more about creating a GitHub account [here](https://help.github.com/en/github/getting-started-with-github/types-of-github-accounts#personal-user-accounts).
 	- On Windows machines, you'll also need to download [Git Bash](https://git-scm.com/downloads), which is a command line interface for using Git and GitHub.
